@@ -9,7 +9,7 @@ use Wechaty\Puppet\EventRequest;
 use Wechaty\Puppet\StartRequest;
 use Wechaty\PuppetClient;
 
-class Grpc
+class Grpc implements InterfaceGrpcService
 {
 
     protected PuppetClient $grpcClient;
@@ -60,15 +60,12 @@ class Grpc
         return $this->grpcClient->start($request);
     }
 
-    public function startGrpcStream(EventRequest $eventRequest) {
+    public function event(EventRequest $request): \Grpc\ServerStreamingCall
+    {
+        return $this->grpcClient->Event($request);
+    }
 
-        $call = $this->grpcClient->Event($eventRequest);
-        $ret = $call->responses();//Generator Object
-        while($ret->valid()) {
-            // Console::logStr($ret->key() . " ");//0 1 2
-            $response = $ret->current();
-            $this->_onGrpcStreamEvent($response);
-            $ret->next();
-        }
+    public function stop(){
+
     }
 }
