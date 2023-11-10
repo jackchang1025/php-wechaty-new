@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  php-wechat-new:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /mnt/d/Code/php-wechaty-new:/var/www

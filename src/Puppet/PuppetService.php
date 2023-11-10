@@ -10,4 +10,6 @@ class PuppetService implements InterfacePuppet
     public function __construct(protected PuppetOptions $puppetOptions)
     {
     }
+
+
 }
